@@ -104,6 +104,8 @@ onnxruntime_add_include_to_target(onnxruntime_optimizer onnxruntime_common onnxr
 target_include_directories(onnxruntime_optimizer PRIVATE ${ONNXRUNTIME_ROOT})
 if (onnxruntime_ENABLE_TRAINING_APIS)
   target_include_directories(onnxruntime_optimizer PRIVATE ${ORTTRAINING_ROOT})
+  target_link_libraries(onnxruntime_optimizer PRIVATE nlohmann_json::nlohmann_json)
+  onnxruntime_add_include_to_target(onnxruntime_optimizer Python::Module)
 endif()
 add_dependencies(onnxruntime_optimizer ${onnxruntime_EXTERNAL_DEPENDENCIES})
 set_target_properties(onnxruntime_optimizer PROPERTIES FOLDER "ONNXRuntime")
