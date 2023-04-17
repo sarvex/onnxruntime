@@ -46,3 +46,4 @@ ARG BUILD_UID=1000
 WORKDIR /home/$BUILD_USER
 RUN adduser --gecos 'onnxruntime Build User' --disabled-password $BUILD_USER --uid $BUILD_UID
 USER $BUILD_USER
+ENV CUDA_MODULE_LOADING "LAZY"
