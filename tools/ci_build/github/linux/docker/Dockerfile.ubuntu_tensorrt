@@ -30,17 +30,6 @@ RUN v="8.6.0.12-1+cuda11.8" &&\
         libnvinfer-lean-dev=${v} libnvinfer-headers-dev=${v} libnvinfer-headers-plugin-dev=${v} libnvinfer-dispatch-dev=${v} libnvinfer-dev=${v} libnvonnxparsers-dev=${v} libnvparsers-dev=${v} libnvinfer-plugin-dev=${v} libnvinfer-vc-plugin-dev=${v}\
         python3-libnvinfer=${v} libnvinfer-samples=${v}
 
-WORKDIR /root
-
-# Allow configure to pick up GDK and CuDNN where it expects it.
-# (Note: $CUDNN_VERSION is defined by NVidia's base image)
-RUN _CUDNN_VERSION=$(echo $CUDNN_VERSION | cut -d. -f1-2) && \
-    mkdir -p /usr/local/cudnn-$_CUDNN_VERSION/cuda/include && \
-    ln -s /usr/include/cudnn.h /usr/local/cudnn-$_CUDNN_VERSION/cuda/include/cudnn.h && \
-    mkdir -p /usr/local/cudnn-$_CUDNN_VERSION/cuda/lib64 && \
-    ln -s /etc/alternatives/libcudnn_so /usr/local/cudnn-$_CUDNN_VERSION/cuda/lib64/libcudnn.so && \
-    ln -s /usr/local/cudnn{-$_CUDNN_VERSION,}
-
 ARG BUILD_USER=onnxruntimedev
 ARG BUILD_UID=1000
 WORKDIR /home/$BUILD_USER
