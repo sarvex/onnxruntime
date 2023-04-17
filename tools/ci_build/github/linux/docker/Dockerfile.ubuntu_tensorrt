@@ -1,6 +1,6 @@
-# Tag: nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04
+# Tag: nvidia/cuda:11.8.0-devel-ubuntu20.04
 # Label: com.nvidia.cuda.version: 11.8.0
-# Label: com.nvidia.cudnn.version: 8.7.0
+# Label: com.nvidia.cudnn.version: 8.8.0
 # Ubuntu 20.04
 FROM nvidia/cuda:11.8.0-devel-ubuntu20.04
 
