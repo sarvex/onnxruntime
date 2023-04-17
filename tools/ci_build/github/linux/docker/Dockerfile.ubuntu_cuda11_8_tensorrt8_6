@@ -31,7 +31,7 @@ RUN pip install --upgrade pip
 RUN pip install setuptools>=41.0.0
 
 # Install cuDNN 8.8
-ENV NV_CUDNN_VERSION 8.8.1.3
+ENV NV_CUDNN_VERSION 8.8.0.121
 ENV NV_CUDNN_PACKAGE_NAME "libcudnn8"
 ENV NV_CUDNN_PACKAGE "libcudnn8=$NV_CUDNN_VERSION-1+cuda11.8"
 ENV NV_CUDNN_PACKAGE_DEV "libcudnn8-dev=$NV_CUDNN_VERSION-1+cuda11.8"
@@ -46,7 +46,7 @@ RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/
 # Install TensorRT
 RUN v="8.6.0.12-1+cuda11.8" &&\
     apt-get update &&\
-    sudo apt-get install -y libnvinfer8=${v} libnvinfer-lean8=${v} libnvinfer-dispatch8=${v} libnvonnxparsers8=${v} libnvparsers8=${v} libnvinfer-plugin8=${v} libnvinfer-vc-plugin8=${v} libnvinfer-lean=${v}\
+    sudo apt-get install -y libnvinfer8=${v} libnvinfer-lean8=${v} libnvinfer-dispatch8=${v} libnvonnxparsers8=${v} libnvparsers8=${v} libnvinfer-plugin8=${v} libnvinfer-vc-plugin8=${v}\
         libnvinfer-lean-dev=${v} libnvinfer-headers-dev=${v} libnvinfer-headers-plugin-dev=${v} libnvinfer-dispatch-dev=${v} libnvinfer-dev=${v} libnvonnxparsers-dev=${v} libnvparsers-dev=${v} libnvinfer-plugin-dev=${v} libnvinfer-vc-plugin-dev=${v} libnvinfer-lean-dev=${v}\
         python3-libnvinfer=${v} libnvinfer-samples=${v}
 
@@ -58,9 +58,9 @@ RUN cd /usr/src/tensorrt/samples/trtexec && make
 FROM base as final
 
 # Build ORT as non-root
-ARG BUILD_UID=1001
 ARG BUILD_USER=onnxruntimedev
-RUN adduser --uid $BUILD_UID $BUILD_USER
+ARG BUILD_UID=1000
+RUN adduser --gecos 'onnxruntime Build User' --disabled-password $BUILD_USER --uid $BUILD_UID
 USER $BUILD_USER
 
 # ONNX Runtime arguments
