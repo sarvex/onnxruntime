@@ -62,7 +62,6 @@ FROM base as final
 ARG BUILD_USER=onnxruntimedev
 ARG BUILD_UID=1000
 RUN adduser --gecos 'onnxruntime Build User' --disabled-password $BUILD_USER --uid $BUILD_UID
-USER $BUILD_USER
 
 # ONNX Runtime arguments
 
@@ -95,6 +94,7 @@ RUN if [ -z "$ONNXRUNTIME_COMMIT_ID" ] ; then echo "Building branch ${ONNXRUNTIM
     git reset --hard ${ONNXRUNTIME_COMMIT_ID} && git submodule update --recursive ; fi
 
 # Build ORT
+USER $BUILD_USER
 RUN /bin/sh build.sh --parallel --build_shared_lib --cuda_home /usr/local/cuda --cudnn_home /usr/lib/x86_64-linux-gnu/ --use_tensorrt --tensorrt_home /usr/lib/x86_64-linux-gnu/ --config Release --build_wheel --skip_tests --skip_submodule_sync --cmake_extra_defines '"CMAKE_CUDA_ARCHITECTURES='${CMAKE_CUDA_ARCHITECTURES}'"'
 
 # Intall ORT wheel
