@@ -2725,7 +2725,12 @@ static constexpr OrtApi ort_api_1_to_15 = {
     &OrtApis::CastTypeInfoToOptionalTypeInfo,
     &OrtApis::GetOptionalContainedTypeInfo,
     &OrtApis::GetResizedStringTensorElementBuffer,
-    &OrtApis::KernelContext_GetAllocator};
+    &OrtApis::KernelContext_GetAllocator,
+    &OrtApis::CreateROCMProviderOptions,
+    &OrtApis::UpdateROCMProviderOptions,
+    &OrtApis::GetROCMProviderOptionsAsString,
+    &OrtApis::ReleaseROCMProviderOptions
+};
 
 // Asserts to do a some checks to ensure older Versions of the OrtApi never change (will detect an addition or deletion but not if they cancel out each other)
 // If any of these asserts hit, read the above 'Rules on how to add a new Ort API version'
