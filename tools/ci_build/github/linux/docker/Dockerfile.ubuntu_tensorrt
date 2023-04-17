@@ -27,7 +27,7 @@ RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/
 RUN v="8.6.0.12-1+cuda11.8" &&\
     apt-get update &&\
     sudo apt-get install -y libnvinfer8=${v} libnvinfer-lean8=${v} libnvinfer-dispatch8=${v} libnvonnxparsers8=${v} libnvparsers8=${v} libnvinfer-plugin8=${v} libnvinfer-vc-plugin8=${v}\
-        libnvinfer-lean-dev=${v} libnvinfer-headers-dev=${v} libnvinfer-headers-plugin-dev=${v} libnvinfer-dispatch-dev=${v} libnvinfer-dev=${v} libnvonnxparsers-dev=${v} libnvparsers-dev=${v} libnvinfer-plugin-dev=${v} libnvinfer-vc-plugin-dev=${v} libnvinfer-lean-dev=${v}\
+        libnvinfer-lean-dev=${v} libnvinfer-headers-dev=${v} libnvinfer-headers-plugin-dev=${v} libnvinfer-dispatch-dev=${v} libnvinfer-dev=${v} libnvonnxparsers-dev=${v} libnvparsers-dev=${v} libnvinfer-plugin-dev=${v} libnvinfer-vc-plugin-dev=${v}\
         python3-libnvinfer=${v} libnvinfer-samples=${v}
 
 WORKDIR /root
