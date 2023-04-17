@@ -1,6 +1,6 @@
 # Tag: nvidia/cuda:11.8.0-devel-ubuntu20.04
 # Label: com.nvidia.cuda.version: 11.8.0
-# Label: com.nvidia.cudnn.version: 8.8.0
+# Label: com.nvidia.cudnn.version: 8.8.1
 # Ubuntu 20.04
 FROM nvidia/cuda:11.8.0-devel-ubuntu20.04
 
@@ -11,7 +11,7 @@ ADD scripts /tmp/scripts
 RUN /tmp/scripts/install_ubuntu.sh -p $PYTHON_VERSION && /tmp/scripts/install_os_deps.sh && /tmp/scripts/install_python_deps.sh -p $PYTHON_VERSION && rm -rf /tmp/scripts
 
 # Install cuDNN 8.8
-ENV NV_CUDNN_VERSION 8.8.0.121
+ENV NV_CUDNN_VERSION 8.8.1.3
 ENV NV_CUDNN_PACKAGE_NAME "libcudnn8"
 ENV NV_CUDNN_PACKAGE "libcudnn8=$NV_CUDNN_VERSION-1+cuda11.8"
 ENV NV_CUDNN_PACKAGE_DEV "libcudnn8-dev=$NV_CUDNN_VERSION-1+cuda11.8"

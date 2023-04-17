@@ -32,7 +32,7 @@ RUN pip install --upgrade pip
 RUN pip install setuptools>=41.0.0
 
 # Install cuDNN 8.8
-ENV NV_CUDNN_VERSION 8.8.0.121
+ENV NV_CUDNN_VERSION 8.8.1.3
 ENV NV_CUDNN_PACKAGE_NAME "libcudnn8"
 ENV NV_CUDNN_PACKAGE "libcudnn8=$NV_CUDNN_VERSION-1+cuda11.8"
 ENV NV_CUDNN_PACKAGE_DEV "libcudnn8-dev=$NV_CUDNN_VERSION-1+cuda11.8"

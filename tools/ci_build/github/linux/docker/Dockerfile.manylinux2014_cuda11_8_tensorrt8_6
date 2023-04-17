@@ -166,7 +166,7 @@ CMD ["/bin/bash"]
 #Build manylinux2014 docker image end
 
 #Install cuDNN 8.8
-ENV NV_CUDNN_VERSION 8.8.0.121-1
+ENV NV_CUDNN_VERSION 8.8.1.3-1
 ENV NV_CUDNN_PACKAGE libcudnn8-${NV_CUDNN_VERSION}.cuda11.8
 ENV NV_CUDNN_PACKAGE_DEV libcudnn8-devel-${NV_CUDNN_VERSION}.cuda11.8
 
