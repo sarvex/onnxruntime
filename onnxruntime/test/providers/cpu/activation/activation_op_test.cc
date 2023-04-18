@@ -153,7 +153,7 @@ TEST_F(ActivationOpTest, Sigmoid_fp16) {
 
   test.AddInput<MLFloat16>("X", dims, f_X);
   test.AddOutput<MLFloat16>("Y", dims, f_Y);
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST_F(ActivationOpTest, Tanh_fp16) {
@@ -181,7 +181,7 @@ TEST_F(ActivationOpTest, Tanh_fp16) {
 
   test.AddInput<MLFloat16>("X", dims, f_X);
   test.AddOutput<MLFloat16>("Y", dims, f_Y);
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST_F(ActivationOpTest, Relu_fp16) {
@@ -209,7 +209,7 @@ TEST_F(ActivationOpTest, Relu_fp16) {
 
   test.AddInput<MLFloat16>("X", dims, f_X);
   test.AddOutput<MLFloat16>("Y", dims, f_Y);
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 #endif
 

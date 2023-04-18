@@ -76,7 +76,7 @@ void RunTest(const std::vector<int64_t>& input_dims,
   test.AddOutput<T>("output", output_dims, output_data);
   if (std::is_same<T, int8_t>::value) {
     // TensorRT reports error: Assertion Error in makePaddedScale: 0 (regionRanges != nullptr)
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   } else {
     test.Run();
   }

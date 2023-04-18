@@ -44,7 +44,7 @@ TEST(InstanceNormalizationOpTest, InstanceNorm) {
 #if defined(OPENVINO_CONFIG_MYRIAD)  //Disabling this test on MYRIADX temporarily due to a bug
   test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kOpenVINOExecutionProvider});
 #else
-  test.Run();
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 #endif
 }
 
@@ -74,7 +74,7 @@ TEST(InstanceNormalizationOpTest, InstanceNormBatch1) {
 #if defined(OPENVINO_CONFIG_MYRIAD)  //Disabling this test on MYRIADX temporarily due to a bug
   test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kOpenVINOExecutionProvider});
 #else
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 #endif
 }
 
@@ -112,7 +112,7 @@ TEST(InstanceNormalizationOpTest, InstanceNormBatch2) {
 #if defined(OPENVINO_CONFIG_MYRIAD)  //Disabling this test on MYRIADX temporarily due to a bug
   test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kOpenVINOExecutionProvider});
 #else
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 #endif
 }
 
@@ -158,7 +158,7 @@ TEST(InstanceNormalizationOpTest, InstanceNormBatch1_fp16) {
 #if defined(OPENVINO_CONFIG_MYRIAD)  //Disabling this test on MYRIADX temporarily due to a bug
   test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kOpenVINOExecutionProvider});
 #else
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 #endif
 }
 
@@ -209,7 +209,7 @@ TEST(InstanceNormalizationOpTest, InstanceNormBatch2_fp16) {
 #if defined(OPENVINO_CONFIG_MYRIAD)  //Disabling this test on MYRIADX temporarily due to a bug
   test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kOpenVINOExecutionProvider});
 #else
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 #endif
 }
 
@@ -257,7 +257,7 @@ TEST(InstanceNormalizationOpTest, InstanceNorm_2) {
 #if defined(OPENVINO_CONFIG_MYRIAD)  //Disabling this test on MYRIADX temporarily due to a bug
   test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kOpenVINOExecutionProvider});
 #else
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 #endif
 }
 

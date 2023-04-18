@@ -114,7 +114,7 @@ TEST_P(ModelTest, Run) {
     // them is enabled here to save CI build time.
     // Besides saving CI build time, TRT isn’t able to support full ONNX ops spec and therefore some testcases will
     // fail. That's one of reasons we skip those testcases and only test latest ONNX opsets.
-    SkipTest(" tensorrt supports opset 14 to 18");
+    SkipTest(" tensorrt: only test latest ONNX opset 14 to 18");
     return;
   }
 

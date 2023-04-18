@@ -825,7 +825,7 @@ TEST(Loop, Opset11WithNoVariadicInputsAndOutputs) {
   test.AddOutput<float>("loop_scan_out", {1}, {1.0f});
 
   // Disable TensorRT on unsupported data type BOOL
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 // Test a combination of things:
@@ -930,7 +930,7 @@ TEST(Loop, PassThroughSubgraphInputNoTypeOrShape) {
   test.AddOutput<float>("loop_var_0_final", {1}, {123.f});
 
   // Disable TensorRT on unsupported data type BOOL
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(Loop, BugFixIssue4031_implicit_input_handling) {
@@ -1035,7 +1035,7 @@ TEST(Loop, IterationCountAsOutput) {
   test.AddOutput<int64_t>("loop_var_0_final", {3, 1}, {0, 1, 2});
 
   // Disable TensorRT on unsupported data type BOOL
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 #ifdef USE_CUDA
@@ -1159,7 +1159,7 @@ TEST(Loop, SequenceAsLoopCarriedDependency) {
   test.AddSeqOutput("loop_var_0_final", seq_output);
 
   // Disable TensorRT on unsupported data type BOOL
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 #if !defined(DISABLE_OPTIONAL_TYPE)
@@ -1265,7 +1265,7 @@ TEST(Loop, OptionalTypeAsLoopCarriedDependency) {
     test.AddOptionalTypeTensorOutput<float>("Y", {}, nullptr);  // None
 
     // Disable TensorRT on unsupported data type BOOL
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   }
 
   // CASE 2: Optional tensor + non-none
@@ -1285,7 +1285,7 @@ TEST(Loop, OptionalTypeAsLoopCarriedDependency) {
     test.AddOptionalTypeTensorOutput<float>("Y", {2}, &data);  // Non-None
 
     // Disable TensorRT on unsupported data type BOOL
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   }
 
   // CASE 3: Optional tensor sequence + none
@@ -1305,7 +1305,7 @@ TEST(Loop, OptionalTypeAsLoopCarriedDependency) {
     test.AddOptionalTypeSeqOutput<float>("Y", nullptr);  // None
 
     // Disable TensorRT on unsupported data type BOOL
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   }
 
   // CASE 4: Optional tensor sequence + non-none
@@ -1330,7 +1330,7 @@ TEST(Loop, OptionalTypeAsLoopCarriedDependency) {
     test.AddOptionalTypeSeqOutput<float>("Y", &seq);  // Non-None
 
     // Disable TensorRT on unsupported data type BOOL
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   }
 }
 

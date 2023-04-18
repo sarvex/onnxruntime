@@ -99,7 +99,7 @@ static void RunGruTest(const std::vector<float>& X_data,
   }
 
   // TensorRT failed on GRU tests
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 void DefaultActivationsSimpleWeightsNoBias(std::string direction,

@@ -304,7 +304,7 @@ TEST(NhwcFp16PoolOpTest, AvgPoolIncludePadPixel) {
 
   test.AddInput<MLFloat16>("X", x_dims, x_vals);
   test.AddOutput<MLFloat16>("Y", expected_dims, expected_vals);
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(NhwcFp16PoolOpTest, GlobalAveragePool) {

@@ -213,7 +213,7 @@ void RunFusedMatMulTest(const char* op_name, int32_t opset_version = 7, bool tra
     test.AddOutput<T>("Y", t.expected_dims, t.expected_vals);
 
     // Disable TensorRT because of unsupported data type
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   }
 }
 
@@ -311,7 +311,7 @@ TEST(FusedMatMulOpTest, Float16_NoTranspose) {
     test.AddOutput<MLFloat16>("Y", t.expected_dims, f_Y);
 
     // Disable TensorRT because of unsupported data type
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   }
 }
 #endif

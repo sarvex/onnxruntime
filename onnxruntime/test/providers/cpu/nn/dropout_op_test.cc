@@ -48,7 +48,7 @@ TEST(Dropout, WithOptionalOutputOpset7) {
   test.AddOutput<float>("Y", dims, {1.0f, 2.0f, 3.0f, 5.0f});
   test.AddOutput<float>("mask", dims, {0.0f, 0.0f, 0.0f, 0.0f});
   // The TensorRT execution provider doesn't seem to support 'Dropout' with non-boolean mask output
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 }  // namespace test

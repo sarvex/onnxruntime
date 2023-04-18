@@ -25,7 +25,7 @@ TEST(SqueezeOpTest, Squeeze_Empty_Axes_1) {
   test.AddInput<float>("data", {1, 1, 4, 1}, std::vector<float>(4, 1.0f));
   test.AddOutput<float>("squeezed", {4}, std::vector<float>(4, 1.0f));
   // TensorRT doesn't seem to support missing 'axes'
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(SqueezeOpTest, Squeeze_Empty_Axes_2) {
@@ -34,7 +34,7 @@ TEST(SqueezeOpTest, Squeeze_Empty_Axes_2) {
   test.AddInput<float>("data", {2, 4}, std::vector<float>(8, 1.0f));
   test.AddOutput<float>("squeezed", {2, 4}, std::vector<float>(8, 1.0f));
   // TensorRT doesn't seem to support missing 'axes'
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(SqueezeOpTest, Squeeze_Empty_Axes_3) {
@@ -43,7 +43,7 @@ TEST(SqueezeOpTest, Squeeze_Empty_Axes_3) {
   test.AddInput<float>("data", {1, 1, 1, 1}, std::vector<float>{1.0f});
   test.AddOutput<float>("squeezed", {}, std::vector<float>{1.0f});
   // TensorRT doesn't seem to support missing 'axes'
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(SqueezeOpTest, Squeeze_1_int32) {
@@ -150,7 +150,7 @@ TEST(SqueezeOpTest, Squeeze_Empty_Axes_opset13) {
   test.AddInput<float>("data", {1, 1, 4, 1}, std::vector<float>(4, 1.0f));
   test.AddOutput<float>("squeezed", {4}, std::vector<float>(4, 1.0f));
   // TensorRT doesn't seem to support missing 'axes'
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(SqueezeOpTest, SqueezeNegAxis_axes_input) {

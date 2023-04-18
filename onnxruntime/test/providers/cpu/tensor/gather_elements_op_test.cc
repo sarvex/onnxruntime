@@ -77,7 +77,7 @@ void RunTest(std::initializer_list<int64_t> input_dims, std::initializer_list<in
   test.AddOutput<T>("output", indices_dims, output_data);
   // Skip tensorrt for INT8 tests.
   if (std::is_same<T, int8_t>::value) {
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   } else {
     test.Run();
   }

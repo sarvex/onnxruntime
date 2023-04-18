@@ -31,7 +31,7 @@ TEST(ConstantOfShape, Float_Ones) {
   std::fill_n(output.begin(), 4 * 3 * 2, 1.f);
 
   test.AddOutput<float>("output", output_dims, output);
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(ConstantOfShape, Int32_Zeros) {
@@ -53,7 +53,7 @@ TEST(ConstantOfShape, Int32_Zeros) {
   std::fill_n(output.begin(), output.size(), 0);
   test.AddOutput<int32_t>("output", output_dims, output);
 
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(ConstantOfShape, DefaultValue) {
@@ -70,7 +70,7 @@ TEST(ConstantOfShape, DefaultValue) {
   std::fill_n(output.begin(), output.size(), 0.f);
   test.AddOutput<float>("output", output_dims, output);
 
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 inline void SetValue(TensorProto& t_proto, float value) {
@@ -130,7 +130,7 @@ void RunTypedTest(TensorProto::DataType dt, T value) {
   std::fill_n(output.begin(), output.size(), value);
   test.AddOutput<T>("output", output_dims, output);
 
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(ConstantOfShape, TypeTests) {

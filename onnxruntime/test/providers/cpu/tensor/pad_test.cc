@@ -802,7 +802,7 @@ TEST(PadOpTest, BoolType) {
   test.AddInput<int64_t>("pads", {4}, {0, 2, 0, 0});
   test.AddInput<bool>("value", {1}, {true});
   test.AddOutput<bool>("output", {3, 4}, {true, true, true, false, true, true, true, false, true, true, true, false});
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(PadOpTest, ConstantPadAxes) {
@@ -821,7 +821,7 @@ TEST(PadOpTest, ConstantPadAxes) {
                            0, 1, 1, 0,
                            0, 1, 1, 0,
                            0, 1, 1, 0});
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 // CoreML EP only supports padding on last two dimensions and requires axes to be an initializer if provided,

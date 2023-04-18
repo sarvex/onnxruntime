@@ -276,7 +276,7 @@ TEST(GatherOpTest, Gather_axis1_indices2d_int32) {
                           {1, 0, 2, 1,
                            11, 10, 12, 11,
                            21, 20, 22, 21});
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});  // TensorRT: Input batch size is inconsistent
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test    // TensorRT: Input batch size is inconsistent
 }
 
 TEST(GatherOpTest, Gather_axis1_indices2d_uint32) {
@@ -348,7 +348,7 @@ TEST(GatherOpTest, Gather_axis1_indices2d_int8) {
 #if defined(OPENVINO_CONFIG_MYRIAD)
   test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider, kOpenVINOExecutionProvider});  // OpenVINO: Disabled temporarily
 #else
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});  // TensorRT: Assertion `regionRanges != nullptr' failed
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test    // TensorRT: Assertion `regionRanges != nullptr' failed
 #endif
 }
 

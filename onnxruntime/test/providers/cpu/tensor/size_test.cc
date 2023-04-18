@@ -23,7 +23,7 @@ void TestSizeOp(const std::initializer_list<int64_t>& dims) {
   test.AddOutput<int64_t>("B", scalar_dims, {actual_size});
 
   //Run tests. Disable TensorRT EP because of dynamic shape or unsupported data types
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 // Single-dimensional float tensor

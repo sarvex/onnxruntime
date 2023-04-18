@@ -17,7 +17,7 @@ TEST(TensorOpTest, Unsqueeze_1) {
   test.AddAttribute("axes", std::vector<int64_t>{1});
   test.AddInput<float>("input", {2, 3, 4}, std::vector<float>(2 * 3 * 4, 1.0f));
   test.AddOutput<float>("output", {2, 1, 3, 4}, std::vector<float>(2 * 3 * 4, 1.0f));
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(TensorOpTest, Unsqueeze_1_int32) {
@@ -26,7 +26,7 @@ TEST(TensorOpTest, Unsqueeze_1_int32) {
   test.AddAttribute("axes", std::vector<int64_t>{1});
   test.AddInput<int32_t>("input", {2, 3, 4}, std::vector<int32_t>(2 * 3 * 4, 1));
   test.AddOutput<int32_t>("output", {2, 1, 3, 4}, std::vector<int32_t>(2 * 3 * 4, 1));
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(TensorOpTest, Unsqueeze_2) {
@@ -156,7 +156,7 @@ TEST(TensorOpTest, UnsqueezeNegAxis_3) {
     test.AddInput<float>("input", {2, 3, 4}, std::vector<float>(2 * 3 * 4, 1.0f));
     test.AddOutput<float>("output", {1, 1, 1, 2, 3, 4}, std::vector<float>(2 * 3 * 4, 1.0f));
     // TensorRT does not support negative axis.
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   }
   auto run_test = [](bool axes_is_initializer) {
     OpTester test("Unsqueeze", 13);  // use latest opset with axis input

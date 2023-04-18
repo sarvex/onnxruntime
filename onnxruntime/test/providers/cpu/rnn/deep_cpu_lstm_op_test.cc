@@ -144,7 +144,7 @@ static void RunLstmTest(const std::vector<float>& X_data,
   }
 
   // TensorRT failed on LSTM tests
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 void SimpleWeightsNoBiasTwoRows(std::string direction,

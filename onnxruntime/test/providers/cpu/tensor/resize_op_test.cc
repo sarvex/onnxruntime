@@ -502,7 +502,7 @@ TEST(ResizeOpTest, ResizeOpLinearDownSampleTest_2DBilinear_pytorch_half_pixel) {
   std::vector<float> Y = {1.6666666f, 7.0f, 12.333333f};
 
   test.AddOutput<float>("Y", {sizes[0], sizes[1]}, Y);
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});  // TensorRT: results mismatch
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test    // TensorRT: results mismatch
 }
 
 TEST(ResizeOpTest, NhwcResizeOpLinearDownSampleTest_4DBilinear_pytorch_half_pixel_uint8) {
@@ -750,7 +750,7 @@ TEST(ResizeOpTest, ResizeOpLinearDownSampleTest_3DTrilinear_pytorch_half_pixel) 
   std::vector<float> Y = {1.6666666f, 7.0f, 12.333333f};
 
   test.AddOutput<float>("Y", {sizes[0], sizes[1], sizes[2]}, Y);
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});  // TensorRT: results mismatch
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test    // TensorRT: results mismatch
 }
 
 TEST(ResizeOpTest, ResizeOpLinearUpSampleTest_5DTrilinear_pytorch_half_pixel) {
@@ -776,7 +776,7 @@ TEST(ResizeOpTest, ResizeOpLinearUpSampleTest_5DTrilinear_pytorch_half_pixel) {
                           1.0f, 2.0f, 1.0f, 2.0f, 1.0f, 2.0f, 1.0f, 2.0f};
 
   test.AddOutput<float>("Y", {1, 2, 4, 2, 2}, Y);
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});  // TensorRT: results mismatch
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test    // TensorRT: results mismatch
 }
 
 TEST(ResizeOpTest, ResizeOpLinearScalesNoOpTest) {
@@ -1217,7 +1217,7 @@ TEST(ResizeOpTest, ResizeOpNearestUpSample_Nearest2xOptimization_Sizes) {
                             3.0f, 3.0f, 4.0f, 4.0f};
 
     test.AddOutput<float>("Y", {N, C, sizes[2], sizes[3]}, Y);
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});  // TensorRT: results mismatch
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test    // TensorRT: results mismatch
   };
 
   run_test(false);

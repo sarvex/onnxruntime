@@ -202,7 +202,7 @@ TEST(RNNTest, RNN_bidirectional_zigged_batch) {
                                0.39222997F, -0.99489242F, 0.86467457F, 0.0274523F, -0.9431532F, -0.60166585F});
   test.AddOutput<float>("Y_h", Y_h_dims, Y_h_data);
 
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(RNNTest, RNN_reverse_direction_zigged_batch) {
@@ -354,7 +354,7 @@ TEST(RNNTest, RNN_forward_direction_zigged_batch) {
   std::vector<float> Y_h_data({-0.746264696F, -0.0781838298F, -0.751394153F, -0.343922496F, -0.181868196F, -0.130254388F});
   test.AddOutput<float>("Y_h", Y_h_dims, Y_h_data);
 
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 //Doesn't work with CUDA 11.4 on Windows. Need investigation.
@@ -421,7 +421,7 @@ TEST(RNNTest, RNN_bidirectional_0) {
   std::vector<float> Y_h_data({-0.74539614F, 0.93210655F, -0.63887376F, 0.89708149F, -0.50691134F, 0.10560472F});
   test.AddOutput<float>("Y_h", Y_h_dims, Y_h_data);
 
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 //Doesn't work with CUDA 11.4 on Windows. Need investigation.
@@ -478,7 +478,7 @@ TEST(RNNTest, RNN_bidirectional_1) {
   std::vector<float> Y_h_data({0.98009639F, 0.98009639F, 0.99100745F, 0.99100745F});
   test.AddOutput<float>("Y_h", Y_h_dims, Y_h_data);
 
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 typedef enum {
@@ -551,7 +551,7 @@ TEST(RNNTest, DISABLED_RNN_default_attributes_and_forward_direction) {
       test.AddOptionalOutputEdge<float>();
     }
 
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   };
 
   {
@@ -660,7 +660,7 @@ TEST(RNNTest, DISABLED_RNN_reverse_direction) {
       test.AddOptionalOutputEdge<float>();
     }
 
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   };
 
   // TODO: bring in these tests

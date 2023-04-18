@@ -64,7 +64,7 @@ TEST(MathOpTest, Clip_Default_int8) {
                           -5, 9, 82});
 
   // TensorRT does not support Clip opset 12 yet.
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(MathOpTest, Clip_Default_uint8) {
@@ -81,7 +81,7 @@ TEST(MathOpTest, Clip_Default_uint8) {
                            5, 9, 82});
 
   // TensorRT does not support Clip opset 12 yet.
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(MathOpTest, Clip_Default_int64) {
@@ -103,7 +103,7 @@ TEST(MathOpTest, Clip_Default_int64) {
                            -5, 9, 82});
 
   // TensorRT does not support Clip opset 12 yet.
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(MathOpTest, Clip_Default_uint64) {
@@ -120,7 +120,7 @@ TEST(MathOpTest, Clip_Default_uint64) {
                             5, 9, 82});
 
   // TensorRT does not support Clip opset 12 yet.
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(MathOpTest, Clip_int32) {
@@ -139,7 +139,7 @@ TEST(MathOpTest, Clip_int32) {
                           -5, 2, 10});
 
   // TensorRT does not support Clip opset 12 yet.
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(MathOpTest, Clip_uint32) {
@@ -158,7 +158,7 @@ TEST(MathOpTest, Clip_uint32) {
                           3, 7, 10});
 
   // TensorRT does not support Clip opset 12 yet.
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(MathOpTest, Clip) {
@@ -179,7 +179,7 @@ TEST(MathOpTest, Clip) {
                            -5.0f, 2.0f, 5.0f});
 
     // TensorRT does not support Clip opset 11 yet.
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   };
 
   run_test(false);
@@ -205,7 +205,7 @@ TEST(MathOpTest, Clip_Relu6) {
                            0.0f, 2.0f, 6.0f});
 
     // TensorRT does not support Clip opset 11 yet.
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   };
 
   run_test(false);
@@ -231,7 +231,7 @@ TEST(MathOpTest, Clip_Relu1) {
                            -1.0f, 1.0f, 1.0f});
 
     // TensorRT and Tensorrt does not support Clip opset 11 yet.
-    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+    test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
   };
 
   run_test(false);

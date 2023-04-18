@@ -22,7 +22,7 @@ TEST(TensorOpTest, Reshape) {
   test.AddInput<int64_t>("shape", {3}, {-1, 0, 2});
   test.AddOutput<float>("reshaped", {1, 3, 2}, std::vector<float>(6, 1.0f));
   // TensorRT doesn't support dynamic shape tensor for now
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(TensorOpTest, ReshapeWithEmptyDim) {
@@ -32,7 +32,7 @@ TEST(TensorOpTest, ReshapeWithEmptyDim) {
   test.AddInput<int64_t>("shape", {0}, {}, true);
   test.AddOutput<float>("reshaped", {}, std::vector<float>(1, 1.0f));
   // TensorRT doesn't support empty dimension
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(TensorOpTest, ReshapeWithEmptyInput) {
@@ -88,7 +88,7 @@ TEST(TensorOpTest, Reshape_WithOutAllowZero) {
   test.AddAttribute<int64_t>("allowzero", 0);
   test.AddOutput<float>("reshaped", {2, 3}, std::vector<float>(6, 1.0f));
   // TensorRT doesn't support dynamic shape tensor for now
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(TensorOpTest, Reshape_WithAllowZero) {
@@ -135,7 +135,7 @@ TEST(TensorOpTest, Reshape_EmptyInputWithAllowZero) {
   test.AddOutput<float>("reshaped", {3, 4, 0}, std::vector<float>());
 
   // TensorRT doesn't support dynamic shape tensor for now
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(TensorOpTest, Reshape_UnknownDimWithoutAllowZero) {
@@ -414,7 +414,7 @@ TEST(TensorOpTest, ShapeTest2D) {
   test.AddInput<float>("data", {2, 3}, std::vector<float>(6, 1.0f));
   test.AddOutput<int64_t>("shape", {2}, {2, 3});
   // TensorRT: volume of dimensions is not consistent with weights size
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 TEST(TensorOpTest, ShapeTest3D) {
@@ -423,7 +423,7 @@ TEST(TensorOpTest, ShapeTest3D) {
   test.AddInput<float>("data", {2, 3, 4}, std::vector<float>(24, 1.0f));
   test.AddOutput<int64_t>("shape", {3}, {2, 3, 4});
   // TensorRT: volume of dimensions is not consistent with weights size
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 
 void MeanVarianceNormalizationFunctionDefaultPerChannel() {

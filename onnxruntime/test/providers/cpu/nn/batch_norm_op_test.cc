@@ -754,7 +754,7 @@ TEST(BatchNormTest, BatchNorm2d_fp16) {
   test.AddInput<MLFloat16>("mean", {3}, f_mean);
   test.AddInput<MLFloat16>("var", {3}, f_var);
   test.AddOutput<MLFloat16>("output", input_shape, f_output);
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 }
 #endif
 
@@ -836,7 +836,7 @@ TEST(BatchNormTest, BatchNorm2d_bfloat16) {
   test.AddInput<float>("mean", {3}, mean);
   test.AddInput<float>("var", {3}, var);
   test.AddOutput<BFloat16>("output", input_shape, FloatsToBFloat16s(expected_output));
-  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {kTensorrtExecutionProvider});
+  test.Run(OpTester::ExpectResult::kExpectSuccess, "", {}); // Unleash TRT EP test  
 
   std::vector<std::unique_ptr<IExecutionProvider>> execution_providers;
 #if defined(USE_DNNL)
