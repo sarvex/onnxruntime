@@ -1380,6 +1380,9 @@ TEST(InferenceSessionTests, Test3LayerNestedSubgraph) {
   // Inside the then-branch of 'graph_0__if_0', there is a nested 'If' node: 'graph_0__if_0__else__if_0'
   // This 3-layer nested graph consumes the same initializer in different sub-graph, used by operators that partitioned in different EP.
 
+  DefaultLoggingManager().SetDefaultLoggerSeverity(logging::Severity::kVERBOSE);
+  DefaultLoggingManager().SetDefaultLoggerVerbosity(0);
+
   // the then-branch subgraph of main graph's If node 'graph_0__if_0'
   ONNX_NAMESPACE::GraphProto graph_0__if_0__then;
   {
@@ -1610,6 +1613,9 @@ TEST(InferenceSessionTests, Test3LayerNestedSubgraph) {
 
 TEST(InferenceSessionTests, Test2LayerNestedSubgraph) {
   // The main graph contains a 'If' node which has a subgraph that consumes implicit inputs
+
+  DefaultLoggingManager().SetDefaultLoggerSeverity(logging::Severity::kVERBOSE);
+  DefaultLoggingManager().SetDefaultLoggerVerbosity(0);
 
   // the then-branch (and else-branch, they are the same graph in this test case) subgraph of main graph's If node 'graph_0__if_0'
   ONNX_NAMESPACE::GraphProto graph_0__if_0__thenelse;
