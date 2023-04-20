@@ -35,9 +35,8 @@ RUN pip install setuptools>=41.0.0
 RUN v="8.6.0.12-1+cuda11.8" &&\
     apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub &&\
     apt-get update &&\
-    sudo apt-get install -y libnvinfer8=${v} libnvonnxparsers8=${v} libnvparsers8=${v} libnvinfer-plugin8=${v} libnvinfer-vc-plugin8=${v}\
-        libnvinfer-dev=${v} libnvonnxparsers-dev=${v} libnvparsers-dev=${v} libnvinfer-plugin-dev=${v} libnvinfer-vc-plugin-dev=${v}\
-        python3-libnvinfer=${v} libnvinfer-samples=${v}
+    sudo apt-get install -y tensorrt-dev=${v} tensorrt-libs=${v} libnvinfer-lean8=${v} python3-libnvinfer-lean=${v} libnvinfer-dispatch8=${v} python3-libnvinfer-dispatch=${v}\
+        libnvinfer-lean-dev=${v} libnvinfer-dispatch-dev=${v} python3-libnvinfer=${v}
 
 # Compile trtexec
 RUN cd /usr/src/tensorrt/samples/trtexec && make
@@ -46,18 +45,13 @@ RUN cd /usr/src/tensorrt/samples/trtexec && make
 # Build final image from base. Builds ORT.
 FROM base as final
 
-# Build ORT as non-root
-ARG BUILD_UID=1001
-ARG BUILD_USER=onnxruntimedev
-RUN adduser --uid $BUILD_UID $BUILD_USER
-
 # ONNX Runtime arguments
 
 # URL to the github repo from which to clone ORT.
 ARG ONNXRUNTIME_REPO=https://github.com/Microsoft/onnxruntime
 
 # The local directory into which to clone ORT.
-ARG ONNXRUNTIME_LOCAL_CODE_DIR=/home/$BUILD_USER/code
+ARG ONNXRUNTIME_LOCAL_CODE_DIR=/code
 
 # The git branch of ORT to checkout and build.
 ARG ONNXRUNTIME_BRANCH=main
@@ -74,7 +68,6 @@ WORKDIR ${ONNXRUNTIME_LOCAL_CODE_DIR}
 RUN git clone --single-branch --branch ${ONNXRUNTIME_BRANCH} --recursive ${ONNXRUNTIME_REPO} onnxruntime &&\
     /bin/sh onnxruntime/dockerfiles/scripts/install_common_deps.sh
 
-USER $BUILD_USER
 WORKDIR ${ONNXRUNTIME_LOCAL_CODE_DIR}/onnxruntime
 
 # Reset to a specific commit if specified by build args.
@@ -83,7 +76,7 @@ RUN if [ -z "$ONNXRUNTIME_COMMIT_ID" ] ; then echo "Building branch ${ONNXRUNTIM
     git reset --hard ${ONNXRUNTIME_COMMIT_ID} && git submodule update --recursive ; fi
 
 # Build ORT
-RUN /bin/sh build.sh --parallel --build_shared_lib --cuda_home /usr/local/cuda --cudnn_home /usr/lib/x86_64-linux-gnu/ --use_tensorrt --tensorrt_home /usr/lib/x86_64-linux-gnu/ --config Release --build_wheel --skip_tests --skip_submodule_sync --cmake_extra_defines '"CMAKE_CUDA_ARCHITECTURES='${CMAKE_CUDA_ARCHITECTURES}'"'
+RUN /bin/sh build.sh --allow_running_as_root--parallel --build_shared_lib --cuda_home /usr/local/cuda --cudnn_home /usr/lib/x86_64-linux-gnu/ --use_tensorrt --tensorrt_home /usr/lib/x86_64-linux-gnu/ --config Release --build_wheel --skip_tests --skip_submodule_sync --cmake_extra_defines '"CMAKE_CUDA_ARCHITECTURES='${CMAKE_CUDA_ARCHITECTURES}'"'
 
 # Intall ORT wheel
 RUN pip install ${ONNXRUNTIME_LOCAL_CODE_DIR}/onnxruntime/build/Linux/Release/dist/*.whl
