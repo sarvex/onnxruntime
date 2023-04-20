@@ -193,4 +193,8 @@ RUN adduser --uid $BUILD_UID $BUILD_USER
 WORKDIR /home/$BUILD_USER
 USER $BUILD_USER
 ENV PATH /usr/local/dotnet:$PATH
+RUN echo $CUDA_MODULE_LOADING
 ENV CUDA_MODULE_LOADING "LAZY"
+RUN ldd --version /usr/lib64/libc.so.6
+RUN ldd --version /usr/lib64/libstdc++.so.6
+RUN echo $CUDA_MODULE_LOADING
