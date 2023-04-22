@@ -80,7 +80,7 @@ namespace Microsoft.ML.OnnxRuntime.Tests
 
                 var providerOptionsDict = new Dictionary<string, string>();
                 providerOptionsDict["device_id"] = "0";
-                providerOptionsDict["gpu_mem_limit"] = "20971520";
+                providerOptionsDict["gpu_mem_limit"] = "41943040";
                 providerOptionsDict["arena_extend_strategy"] = "kSameAsRequested";
                 providerOptionsDict["cudnn_conv_algo_search"] = "DEFAULT";
                 providerOptionsDict["do_copy_in_default_stream"] = "1";
