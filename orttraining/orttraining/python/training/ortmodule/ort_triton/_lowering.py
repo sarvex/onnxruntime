@@ -181,18 +181,20 @@ class GraphLowering:
             axis += input_rank
         return keep_dims, axis
 
-    def _process_node(
-        self, node: NodeProto, precessors: Dict[str, List[NodeProto]], processed: Set[str], group: NodeGroup
-    ):
-        processed.add(node.name)
+    def _process_node(self, node: NodeProto, precessors: Dict[str, List[NodeProto]], group: NodeGroup):
+        dependent_nodes = set()
+        dependent_nodes.add(node.name)
         for precessor in precessors[node.name]:
+            if precessor.name in dependent_nodes:
+                continue
             keep_dims = 1
             reduce_axis = -1
             if is_reduction_node(precessor):
                 keep_dims, reduce_axis = self._get_reduce_info(precessor)
             if group.compatible(precessor, keep_dims, reduce_axis):
                 next_group = group.add_node(precessor, reduce_axis)
-                self._process_node(precessor, precessors, processed, next_group)
+                dependent_nodes.update(self._process_node(precessor, precessors, next_group))
+        return dependent_nodes
 
     def _group_nodes(self):
         producers = dict()
@@ -205,6 +207,8 @@ class GraphLowering:
             for input in node.input:
                 if input in producers:
                     precessors[node.name].append(producers[input])
+        for _, value in precessors.items():
+            value.sort(key=sorted_nodes.index, reverse=True)
         for idx in range(len(sorted_nodes) - 1, -1, -1):
             node = sorted_nodes[idx]
             if node.name not in processed:
@@ -212,7 +216,7 @@ class GraphLowering:
                 if is_reduction_node(node):
                     _, reduce_axis = self._get_reduce_info(node)
                 self._groups.append(NodeGroup(node, reduce_axis, self._node_arg_infos))
-                self._process_node(node, precessors, processed, self._groups[-1])
+                processed.update(self._process_node(node, precessors, self._groups[-1]))
 
     def _get_node_io(self, node: NodeProto) -> Tuple[List[TensorArg], List[TensorArg]]:
         input_args = []

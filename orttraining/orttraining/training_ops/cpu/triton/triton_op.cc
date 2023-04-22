@@ -37,8 +37,14 @@ Status TritonOp::Compute(OpKernelContext* context) const {
   PyTuple_SetItem(args.get(), 1, PyLong_FromLongLong(static_cast<long long>(onnx_key_)));
   PyTuple_SetItem(args.get(), 2, PyBytes_FromStringAndSize(onnx_string_.c_str(), onnx_string_.size()));
   for (size_t i = 0; i < input_size; ++i) {
-    PyTuple_SetItem(args.get(), static_cast<Py_ssize_t>(i + 3),
-                    ToDlpack(*p_ctx_internal->GetInputMLValue(static_cast<int>(i))));
+    const OrtValue* ort_value = p_ctx_internal->GetInputMLValue(static_cast<int>(i));
+    if (!ort_value) {
+      PyTuple_SetItem(args.get(), static_cast<Py_ssize_t>(i + 3), Py_None);
+      Py_INCREF(Py_None);
+    } else {
+      PyTuple_SetItem(args.get(), static_cast<Py_ssize_t>(i + 3),
+                      ToDlpack(*p_ctx_internal->GetInputMLValue(static_cast<int>(i))));
+    }
   }
 
   PythonObjectPtr ret(PyObject_CallObject(executor, args.get()), PythonObjectDeleter);

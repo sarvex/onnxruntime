@@ -63,11 +63,12 @@ def get_config() -> str:
 
 def execute_triton_op(func_name: str, onnx_key: int, onnx_str: bytes, *tensors):
     try:
-        torch_tensors = [_from_dlpack(tensor) for tensor in tensors]
+        torch_tensors = [_from_dlpack(tensor) if tensor is not None else None for tensor in tensors]
         if not onnx_str:
             assert func_name
             func = getattr(sys.modules[".".join(__name__.split(".")[:-1])], func_name)
         else:
+            assert all(tensor is not None for tensor in torch_tensors)
             concrete_shapes = [list(tensor.size()) for tensor in torch_tensors]
             func_name, mod = ModuleCache.load(onnx_key, onnx_str, concrete_shapes)
             func = getattr(mod, func_name)
