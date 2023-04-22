@@ -96,7 +96,7 @@ namespace Microsoft.ML.OnnxRuntime.Tests
                 value = resultProviderOptionsDict["device_id"];
                 Assert.Equal("0", value);
                 value = resultProviderOptionsDict["gpu_mem_limit"];
-                Assert.Equal("20971520", value);
+                Assert.Equal("41943040", value);
                 value = resultProviderOptionsDict["arena_extend_strategy"];
                 Assert.Equal("kSameAsRequested", value);
                 value = resultProviderOptionsDict["cudnn_conv_algo_search"];
