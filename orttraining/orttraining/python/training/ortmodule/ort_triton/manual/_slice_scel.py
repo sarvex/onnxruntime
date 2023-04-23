@@ -16,7 +16,7 @@ from .._utils import get_attribute, to_numpy_array
 
 
 @triton.jit
-def _slice_log_softmax_kernel(log_prob, logit, d, c, RBLOCK: tl.constexpr):
+def _slice_log_softmax_kernel(log_prob, logit, d: tl.constexpr, c: tl.constexpr, RBLOCK: tl.constexpr):
     xoffset = tl.program_id(0)
     logit_xoffset = (xoffset // d * (d + 1) + xoffset % d) * c
     rbase = tl.arange(0, RBLOCK)
@@ -43,7 +43,17 @@ def _slice_log_softmax_kernel(log_prob, logit, d, c, RBLOCK: tl.constexpr):
 
 
 @triton.jit
-def _slice_scel_kernel(loss, factor, log_prob, label, ignore_index, d, c, n_cols, RBLOCK: tl.constexpr):
+def _slice_scel_kernel(
+    loss,
+    factor,
+    log_prob,
+    label,
+    ignore_index,
+    d: tl.constexpr,
+    c: tl.constexpr,
+    n_cols: tl.constexpr,
+    RBLOCK: tl.constexpr,
+):
     rbase = tl.arange(0, RBLOCK)
     neg_sum_row = tl.zeros([RBLOCK], tl.float32)
     factor_row = tl.zeros([RBLOCK], tl.float32)
@@ -70,8 +80,9 @@ def triton_slice_scel(logit, label, ignore_index):
     n = logit.numel() // (logit_d * c)
     log_prob_shape = list(logit.shape)[:-2] + [d, c]
     log_prob = torch.empty(log_prob_shape, dtype=torch.float, device=logit.device)
-    rblock = 1024 if c > 1024 else triton.next_power_of_2(c)
-    _slice_log_softmax_kernel[(n * d,)](log_prob, logit, d, c, RBLOCK=rblock)
+    rblock = 4096 if c > 4096 else triton.next_power_of_2(c)
+    num_warps = 16 if rblock >= 4096 else (8 if rblock >= 2048 else 4)
+    _slice_log_softmax_kernel[(n * d,)](log_prob, logit, d, c, num_warps=num_warps, RBLOCK=rblock)
     loss = torch.empty([], dtype=logit.dtype, device=logit.device)
     factor = torch.empty([], dtype=torch.float, device=logit.device)
     n_cols = n * d
@@ -81,7 +92,17 @@ def triton_slice_scel(logit, label, ignore_index):
 
 
 @triton.jit
-def _slice_scel_backward_kernel(dlogit, dloss, log_prob, label, factor, d, c, n_elements, XBLOCK: tl.constexpr):
+def _slice_scel_backward_kernel(
+    dlogit,
+    dloss,
+    log_prob,
+    label,
+    factor,
+    d: tl.constexpr,
+    c: tl.constexpr,
+    n_elements: tl.constexpr,
+    XBLOCK: tl.constexpr,
+):
     xoffset = tl.program_id(0) * XBLOCK
     xindex = xoffset + tl.arange(0, XBLOCK)
     xmask = xindex < n_elements
@@ -99,7 +120,16 @@ def _slice_scel_backward_kernel(dlogit, dloss, log_prob, label, factor, d, c, n_
 
 @triton.jit
 def _slice_scel_bias_backward_kernel(
-    dlogit, dloss, log_prob, label, factor, bias, dlogit_d, c, n_elements, XBLOCK: tl.constexpr
+    dlogit,
+    dloss,
+    log_prob,
+    label,
+    factor,
+    bias,
+    dlogit_d: tl.constexpr,
+    c: tl.constexpr,
+    n_elements: tl.constexpr,
+    XBLOCK: tl.constexpr,
 ):
     xoffset = tl.program_id(0) * XBLOCK
     xindex = xoffset + tl.arange(0, XBLOCK)

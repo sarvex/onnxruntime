@@ -118,6 +118,7 @@ class TypeAndShapeInfer:
         "ReduceSum": _infer_reduction,
         "ReduceMax": _infer_reduction,
         "ReduceMin": _infer_reduction,
+        "Sum": _infer_elementwise,
     }
 
     @classmethod

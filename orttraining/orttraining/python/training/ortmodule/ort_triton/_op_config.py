@@ -18,6 +18,7 @@ _ELEMENTWISE_OPS = {
     "Dropout": {"domain": "", "versions": [6, 9, 13], "is_no_op": False, "conditions": {}},
     "DropoutGrad": {"domain": "com.microsoft", "versions": [1], "is_no_op": False, "conditions": {}},
     "Identity": {"domain": "", "versions": [6, 9, 13], "is_no_op": True, "conditions": {}},
+    "Sum": {"domain": "", "versions": [6, 8, 13], "is_no_op": False, "conditions": {}},
     # "Tanh", "Erf", "Gelu", "FastGelu", "Relu", "Equal", "Not"
 }
 

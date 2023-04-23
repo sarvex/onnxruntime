@@ -235,6 +235,11 @@ class TritonCodegen(NodeVisitor):
             else:
                 kwargs["dtype"] = to_dtype.__name__
 
+        if op_type == "Sum":
+            output_var = kwargs["o0"]
+            formula = " + ".join([kwargs[f"i{idx}"] for idx in range(len(node.inputs))])
+            return f"{space_indent}{output_var} = {formula}\n"
+
         return TritonCodegen._COMPUTE_CODE_TEMPLATES[op_type].format(indent=space_indent, **kwargs)
 
     def ReduceNode(self, node: ReduceNode, context: CodegenContext, indent: int) -> str:
